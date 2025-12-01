@@ -26,102 +26,109 @@
   </header>
 
   <main class="project-page">
+    <!-- Page intro -->
     <section class="page-hero small">
       <h1>Fine-Tune Cell Annotation Tool</h1>
       <p>
-        An interactive Python tool that lets researchers adjust model-generated
-        neuron detections in real time using custom bounding boxes.
+        An interactive Python tool that lets researchers correct model-generated neuron
+        detections in real time and export clean annotations for retraining.
       </p>
     </section>
 
+    <!-- Main layout -->
     <section class="section project-layout">
       <div class="project-main">
         <h2>Project Description</h2>
         <p>
-          The Fine-Tune Cell Annotation Tool is a desktop application built in
-          Python to help neuroscience labs review and correct model-generated
-          detections in brain images. Instead of manually drawing every box from
-          scratch, researchers can start from a model prediction and quickly
-          adjust bounding boxes, delete false positives, and add missed cells.
+          The Fine-Tune Cell Annotation Tool is a desktop application built in Python to help
+          neuroscience labs review and correct model-generated cell detections in Bell Jar,
+          a neurohistological image analysis platform in the Kim Lab. Automated YOLOv8
+          detections are loaded on top of tiled brain images, and users can directly
+          edit bounding boxes before saving corrected labels for model retraining.
         </p>
         <p>
-          The tool loads large microscopy images, tiles them into smaller
-          regions, and overlays the model’s bounding boxes. Users can then edit
-          these boxes directly on the image and export corrected annotations for
-          future model training and analysis.
+          This project addresses a common problem in computer vision workflows: models
+          are good but not perfect, and fully manual annotation is too slow. Fine-Tune
+          creates a feedback loop where user corrections make the model better over time.
         </p>
 
         <h2>Goals</h2>
         <ul>
-          <li>Speed up the process of reviewing model predictions for cell detection.</li>
-          <li>Make it easy for researchers to correct bounding boxes without coding.</li>
-          <li>Keep all interaction inside a single, simple Python application.</li>
-          <li>Create annotation files that can be used later for model fine-tuning.</li>
+          <li>Speed up the process of reviewing cell detection predictions.</li>
+          <li>Make it easy for researchers to add, move, and delete bounding boxes.</li>
+          <li>Keep all interaction inside a simple, single-window Python GUI.</li>
+          <li>Export YOLO-format annotations that can be used directly for model fine-tuning.</li>
         </ul>
 
-        <h2>Process</h2>
+        <h2>Methodology</h2>
+        <p>The workflow follows the pipeline from my research poster:</p>
         <ol>
-          <li>
-            <strong>Image tiling and loading.</strong>
-            I started by writing code to split large brain images into
-            640 × 640 tiles so that they could be viewed and edited smoothly.
-          </li>
-          <li>
-            <strong>Overlaying model predictions.</strong>
-            I added logic to draw bounding boxes for each model detection on top
-            of the image tiles, making sure coordinates stayed accurate after
-            scaling and zooming.
-          </li>
-          <li>
-            <strong>Interactive editing.</strong>
-            I implemented tools to add, move, and delete boxes using mouse
-            clicks and drags, with the coordinates updating in real time.
-          </li>
-          <li>
-            <strong>Saving annotations.</strong>
-            I created a simple export format that stores the final positions of
-            all boxes so the data can be used to fine-tune the detection model
-            later.
-          </li>
-          <li>
-            <strong>Interface polish.</strong>
-            I combined the image viewer and annotation controls into a single
-            window so users can focus on the image while editing.
-          </li>
+          <li><strong>Input image loading:</strong> large microscopy images are loaded into the tool.</li>
+          <li><strong>Tiling:</strong> images are split into 640×640 tiles for smooth viewing and editing.</li>
+          <li><strong>Model prediction:</strong> a YOLOv8 model predicts neuron locations on each tile.</li>
+          <li><strong>User annotation:</strong> users add, adjust, or delete bounding boxes with live updates.</li>
+          <li><strong>Saving annotations:</strong> images are saved to an <code>images/</code> folder and labels to a matching <code>labels/</code> folder.</li>
+          <li><strong>Retraining:</strong> the cleaned annotations are used to fine-tune the detection model.</li>
         </ol>
+
+        <h2>Results</h2>
+        <p>
+          Before-and-after comparisons from the poster show that the model performs better
+          after being retrained with user-corrected labels: fewer false positives, fewer
+          missed neurons, and more reliable detections across tiles. The tool also
+          reduces the amount of fully manual annotation time needed for each dataset.
+        </p>
+
+        <h2>Future Directions</h2>
+        <ul>
+          <li>Integrate the Fine-Tune workflow directly into the main Bell Jar application.</li>
+          <li>Improve model behavior so it does not miss detections at standard confidence thresholds.</li>
+          <li>Fix fullscreen and window-closing bugs to make the app more robust for long sessions.</li>
+          <li>Add more options for tile management and custom slicing sizes.</li>
+        </ul>
 
         <h2>Tools Used</h2>
         <ul class="pill-list">
           <li>Python</li>
-          <li>PyQt / GUI Toolkit</li>
-          <li>NumPy</li>
-          <li>OpenCV / Image Processing</li>
-          <li>YOLO-based Model Outputs</li>
+          <li>PyQt GUI Toolkit</li>
+          <li>OpenCV</li>
+          <li>YOLOv8</li>
+          <li>Machine Learning</li>
         </ul>
 
         <h2>Outcomes</h2>
         <p>
-          The tool gives researchers a visual way to correct model mistakes
-          without needing to write code. It turns long manual annotation
-          sessions into a faster review and edit process. The corrected boxes
-          are saved in a format that can be used for training and evaluation in
-          future versions of the detection model.
-        </p>
-        <p>
-          This project also helped me practice breaking a complex idea into
-          smaller features: tiling images, drawing boxes, handling mouse events,
-          and exporting clean data for machine learning workflows.
+          This project produced a complete annotation and feedback pipeline that turns
+          manual edits into structured training data. It also gave me experience with GUI
+          design, image tiling, bounding box logic, and integrating model retraining into
+          a research workflow.
         </p>
       </div>
 
       <aside class="project-sidebar">
-        <div class="image-placeholder tall">
-          <p>Screenshot of Fine-Tune Tool UI<br>Placeholder</p>
+        <div class="image-placeholder no-border">
+          <img
+            src="images/fine-tune-ui.png"
+            alt="Fine-Tune Cell Annotation Tool user interface"
+            class="sidebar-image-large"
+          >
         </div>
-        <div class="image-placeholder">
-          <p>Poster Figure or Diagram<br>Placeholder</p>
-        </div>
-        <a href="projects.html" class="btn secondary full-width">Back to Projects</a>
+
+        <a
+          href="posters/fine-tune-poster.pdf"
+          class="poster-link"
+          target="_blank"
+        >
+          <img
+            src="images/fine-tune-poster-thumb.png"
+            alt="Fine-Tune Cell Annotation Tool research poster"
+            class="poster-image"
+          >
+        </a>
+
+        <a href="projects.html" class="btn secondary full-width">
+          Back to Projects
+        </a>
       </aside>
     </section>
   </main>
