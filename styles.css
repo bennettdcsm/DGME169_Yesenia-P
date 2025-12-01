@@ -344,6 +344,19 @@ main {
   display: block;
 }
 
+.image-placeholder img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0.75rem;
+}
+
+.image-placeholder.no-border {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
 /* Optional hover effect */
 .poster-link:hover .poster-image {
   transform: translateY(-2px);

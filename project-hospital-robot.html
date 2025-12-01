@@ -38,57 +38,87 @@
       <div class="project-main">
         <h2>Project Description</h2>
         <p>
-          This project explores how low-cost embedded systems can be used to
-          automate parts of hospital sanitation. The robot uses several ESP32
-          boards connected through a TCA9548A I2C multiplexer to coordinate
-          different tasks such as navigation, scanning, and reporting. The overall
-          behavior is managed by a multi-ESP32 state machine architecture, where a
-          master board controls the high-level states and each slave ESP32 handles
-          its own local actions.
+          This project expands on real challenges in hospital sanitation: staff shortages,
+          inconsistent cleaning between patients, and the need for more frequent surface
+          sanitization. The Autonomous Sanitation Assistant Robot (ASAR) was designed to
+          help hospital housekeepers clean surfaces more efficiently, consistently, and
+          with quantifiable verification.
+        </p>
+        <p>
+          ASAR navigates hospital environments, cleans target surfaces using a mounted
+          disinfecting arm, and then uses thermal imaging combined with machine-learning
+          inspired analysis to assess whether the cleaning was successful. The system
+          integrates multi-ESP32 communication, multiple sensing modalities, and a mobile
+          application for user control and cleaning validation.
         </p>
 
         <h2>Goals</h2>
         <ul>
-          <li>Design a multi-ESP32 architecture for coordinated robot control.</li>
-          <li>Integrate ultrasonic sensors for obstacle detection.</li>
-          <li>Use an MLX90640 thermal array to detect areas of interest.</li>
-          <li>Create a state machine that manages cleaning and scanning modes.</li>
+          <li>Design a multi-ESP32 architecture where each microcontroller manages its own subsystem (arm motion, navigation, sensing).</li>
+          <li>Provide a reliable sanitizing routine controllable through a mobile app.</li>
+          <li>Clean surfaces more frequently and efficiently than standard manual workflows.</li>
+          <li>Include a verification step that uses thermal imaging to detect reduced bacterial activity after cleaning.</li>
         </ul>
 
         <h2>Process</h2>
         <ol>
-          <li>Sketched out the robot states and transitions in a state diagram.</li>
-          <li>Wired multiple ESP32 boards to the TCA9548A I2C switch.</li>
-          <li>Implemented individual tasks (movement, sensing, reporting) per board.</li>
-          <li>Tested each state separately, then integrated the full system.</li>
+          <li>Identified real sanitation workflow problems in hospitals based on research and user interviews.</li>
+          <li>Developed a multi-node ESP32 system with a central master board communicating via a TCA9548A I2C multiplexer.</li>
+          <li>Built the mechanical arm with multi-segment motion for wiping surfaces using a predefined cleaning pattern.</li>
+          <li>Integrated ultrasonic sensors, wheel modules, and H-Bridge motor drivers for autonomous movement.</li>
+          <li>Added an ESP32-C3 camera and MLX90640 thermal array to measure surface temperature differences before and after cleaning.</li>
+          <li>Designed a companion mobile app allowing users to log in, select devices, start cleaning tasks, and view cleanliness diagnostics.</li>
         </ol>
+
+        <h2>How ASAR Determines Cleanliness</h2>
+        <p>
+          Research shows that metabolic heat from bacteria can be detected before visible
+          growth appears. The MLX90640 infrared sensor captures a 768-pixel temperature
+          array, and the system checks for a noticeable temperature decrease after
+          cleaning as a sign that bacterial activity has been reduced. This gives hospital
+          staff quantifiable validation instead of guesswork.
+        </p>
 
         <h2>Tools Used</h2>
         <ul class="pill-list">
           <li>ESP32</li>
-          <li>C / C++</li>
+          <li>ESP32-C3 (camera)</li>
           <li>FreeRTOS</li>
-          <li>TCA9548A I2C Multiplexer</li>
-          <li>MLX90640 Thermal Sensor</li>
           <li>Ultrasonic Sensors</li>
+          <li>H-Bridge Motor Drivers</li>
+          <li>MLX90640 Thermal Camera</li>
+          <li>TCA9548A I2C Multiplexer</li>
+          <li>Mobile App (control &amp; diagnostics)</li>
         </ul>
 
         <h2>Outcomes</h2>
         <p>
-          The final prototype can navigate a controlled test space, detect objects
-          with ultrasonic sensors, and use thermal data to prioritize regions. The
-          multi-ESP32 design also makes the robot easier to extend with additional
-          modules in the future.
+          ASAR successfully navigates controlled test spaces, detects high-priority zones
+          using thermal imaging, cleans surfaces using its multi-segment arm, and evaluates
+          cleaning effectiveness. The modular design allows future expansions, such as
+          additional sensing modes or improved autonomy.
+        </p>
+        <p>
+          The final prototype demonstrates that low-cost, multi-microcontroller robots can
+          support overworked hospital staff and improve overall sanitation quality.
         </p>
       </div>
 
       <aside class="project-sidebar">
-        <div class="image-placeholder tall">
-          <p>Project Image / Robot Photo<br>Placeholder</p>
+        <div class="image-placeholder no-border">
+          <img
+            src="images/hospital-robot.jpg"
+            alt="Hospital sanitation robot prototype on a test floor."
+          >
         </div>
-        <div class="image-placeholder">
-          <p>State Machine Diagram<br>Placeholder</p>
+
+        <div class="image-placeholder no-border">
+          <img
+            src="images/hospital-wiring-diagram.png"
+            alt="Block and wiring diagram showing the multi-ESP32 architecture, MUX, sensors, and motors."
+          >
         </div>
+
         <a href="projects.html" class="btn secondary full-width">Back to Projects</a>
       </aside>
     </section>
