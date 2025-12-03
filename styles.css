@@ -118,10 +118,9 @@ main {
   justify-content: center;
 }
 
-/* HERO IMAGE – NEW GLOBAL RULE */
 .hero-image {
   width: 100%;
-  max-width: 420px;        /* change this number to make it bigger/smaller on desktop */
+  max-width: 420px;
   height: auto;
   border-radius: 1.25rem;
   display: block;
@@ -211,6 +210,16 @@ main {
   font-size: 0.9rem;
   text-decoration: none;
   color: #1d4ed8;
+}
+
+.card-link-wrapper {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card-link-wrapper:hover .card-link {
+  text-decoration: underline;
 }
 
 /* Quick links */
@@ -601,6 +610,21 @@ main {
 
 .form-interests input[type="checkbox"] {
   margin-right: 0.5rem;
+}
+
+/* Section heading spacing (Opportunities, etc.) */
+.section h2 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.section h2:first-of-type {
+  margin-top: 0;
+}
+
+.section p + h2,
+.section ul + h2 {
+  margin-top: 2rem;
 }
 
 /* Responsive
