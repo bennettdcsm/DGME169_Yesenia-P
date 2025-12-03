@@ -56,6 +56,25 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" rows="5" required></textarea>
 
+          <fieldset class="form-interests">
+            <legend>What are you contacting me about?</legend>
+
+            <label>
+              <input type="checkbox" name="reason" value="project">
+              A potential project or collaboration
+            </label>
+
+            <label>
+              <input type="checkbox" name="reason" value="opportunity">
+              A job or internship opportunity
+            </label>
+
+            <label>
+              <input type="checkbox" name="reason" value="general-question">
+              General questions about my work
+            </label>
+          </fieldset>
+
           <button type="submit" class="btn primary">Send Message</button>
         </form>
       </div>

@@ -577,6 +577,32 @@ main {
   text-decoration: none;
 }
 
+/* Contact Form – Checkbox Styling */
+.form-interests {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.form-interests legend {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.form-interests label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-interests input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
 /* Responsive
    --------------------------------------------------*/
 
